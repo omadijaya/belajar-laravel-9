@@ -16,6 +16,17 @@ jobs:
       DB_PASSWORD: password
       BROADCAST_DRIVER: log
 
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: laravel
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
     - uses: shivammathur/setup-php@v2
       with:
@@ -24,6 +35,11 @@ jobs:
         coverage: xdebug
 
     - uses: actions/checkout@v3
+
+    - name: Import DB
+      run: |
+        sudo /etc/init.d/mysql start
+        mysql -u root --password=mypassword < liquibase/test.sql
 
     - name: Cache Composer packages
       id: composer-cache
@@ -47,18 +63,6 @@ jobs:
     - name: PHP Linting
       run: vendor/bin/pint --test
 
-    - name: run MYSQL
-      image: mysql:latest
-      env:
-        MYSQL_ALLOW_EMPTY_PASSWORD: false
-        MYSQL_ROOT_PASSWORD: password
-        MYSQL_DATABASE: laravel
-      ports:
-        - 3306/tcp
-      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      run: |
-        sudo /etc/init.d/mysql start
-        mysql -u root --password=mypassword < liquibase/test.sql
 
     - name: Test with phpunit
       run: vendor/bin/phpunit --coverage-text
