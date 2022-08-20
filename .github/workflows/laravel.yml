@@ -39,7 +39,7 @@ jobs:
     - name: Import DB
       run: |
         sudo /etc/init.d/mysql start
-        mysql -u root --password=mypassword < liquibase/test.sql
+        mysql -u root --password=password laravel < liquibase/test.sql
 
     - name: Cache Composer packages
       id: composer-cache
