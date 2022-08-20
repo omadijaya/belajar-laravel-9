@@ -46,8 +46,8 @@ jobs:
           ${{ runner.os }}-php-
             
     - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+      if: steps.composer-cache.outputs.cache-hit != 'true'
+      run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Prepare the application
       run: |
