@@ -11,7 +11,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
-    function abc() {
-        $var = 'abc'
+    function abc(): Array {
+        $var = 'abc';
+        return $var;
     }
 }
