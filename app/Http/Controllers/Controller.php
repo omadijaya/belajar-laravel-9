@@ -10,9 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
-    function abc(): Array {
+
+    public function abc(): array
+    {
         $var = 'abc';
+
         return $var;
     }
 }
