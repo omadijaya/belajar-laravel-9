@@ -11,10 +11,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function abc(): array
+    public function tambah($a, $b)
     {
-        $var = 'abc';
-
-        return $var;
+        return $a + $b;
     }
 }
