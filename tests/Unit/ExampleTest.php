@@ -16,7 +16,7 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
-    
+
     /**
      * Test fungsi tambah.
      *
