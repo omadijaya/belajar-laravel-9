@@ -26,6 +26,6 @@ class ExampleTest extends TestCase
     {
         $controller = new Controller();
         $tambah = $controller->tambah(2, 4);
-        $this->assertEquals(4, $tambah);
+        $this->assertEquals(6, $tambah);
     }
 }
