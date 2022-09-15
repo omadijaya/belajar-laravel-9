@@ -16,7 +16,7 @@ jobs:
       DB_PASSWORD: root
       
     services:
-      test-db:
+      mysql:
         image: mysql:8.0.30
         ports:
           - "3309:3306"
@@ -25,7 +25,6 @@ jobs:
           MYSQL_DATABASE: laravel
         volumes:
           - ./liquibase/test.sql:/docker-entrypoint-initdb.d/init.sql
-          - ./laravel-data:/var/lib/mysql
 
     steps:
     - uses: shivammathur/setup-php@v2
