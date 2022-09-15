@@ -21,7 +21,7 @@ jobs:
       mysql:
         image: mysql:8.0.30
         ports:
-          - "32574:3306"
+          - 3306
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: laravel
@@ -34,7 +34,7 @@ jobs:
     - name: Verify MySQL connection from container 
       run: |
         sudo apt-get install -y mysql-client
-        mysql --host 127.0.0.1 --port 32574 -uroot -proot -e "SHOW DATABASES"
+        mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW DATABASES"
 
     - name: Cache Composer packages
       id: composer-cache
@@ -54,3 +54,5 @@ jobs:
 
     - name: Test with phpunit
       run: vendor/bin/phpunit --coverage-text
+      env:
+        DB_PORT: ${{ job.services.mysql.ports[3306] }}
