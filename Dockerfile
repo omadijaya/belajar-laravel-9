@@ -44,8 +44,11 @@ RUN composer install
 #change ownership of our applications
 RUN chown -R www-data:www-data $APP_HOME
 
+RUN php artisan key:generate
+
 COPY entrypoint.sh /entrypoint.sh
 
+RUN ["chmod", "+x", "/entrypoint.sh"]
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT ["/entrypoint.sh"]
 
