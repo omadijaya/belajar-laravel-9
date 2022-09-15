@@ -27,11 +27,6 @@ jobs:
           MYSQL_DATABASE: laravel
 
     steps:
-    - uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1'
-        extensions: mbstring, dom, fileinfo, mysql
-        coverage: xdebug
 
     - uses: actions/checkout@v3
 
@@ -47,12 +42,6 @@ jobs:
     - name: Install dependencies
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
-
-    - name: Prepare the application
-      run: |
-        php -r "file_exists('.env') || copy('.env.example', '.env');"
-        php artisan key:generate
-        chmod -R 777 storage bootstrap/cache
 
     - name: PHP Linting
       run: vendor/bin/pint --test
