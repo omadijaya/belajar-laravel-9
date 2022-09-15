@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\Form;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Models\Form;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,7 +15,7 @@ use App\Models\Form;
 |
 */
 
-Route::get('/test', function(){
+Route::get('/test', function () {
     return Form::first();
 });
 

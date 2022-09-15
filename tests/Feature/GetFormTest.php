@@ -18,7 +18,7 @@ class GetFormTest extends TestCase
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
-        $this->json('GET', "/api/test")
+        $this->json('GET', '/api/test')
             ->assertStatus(200)
             ->assertJson([
                 'form_id' => 1,
