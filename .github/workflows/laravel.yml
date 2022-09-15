@@ -45,6 +45,9 @@ jobs:
 
     - name: PHP Linting
       run: vendor/bin/pint --test
+      
+    - name: Run Docker
+      run: docker-compose up --build -d
 
     - name: Test with phpunit
       run: vendor/bin/phpunit --coverage-text
