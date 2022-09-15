@@ -16,22 +16,18 @@ jobs:
       DB_DATABASE: laravel
       DB_USERNAME: root
       DB_PASSWORD: root
-      
-    services:
-      mysql:
-        image: mysql:8.0.30
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: laravel
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-        
+
     steps:
+    
+    - uses: shogo82148/actions-setup-mysql@v1
+      with:
+        mysql-version: '8.0'
+        
+    - name: Verify MySQL connection
+      run: mysql -uroot -h127.0.0.1 -e 'SELECT version()'
 
     - uses: actions/checkout@v3
     
-    - name: Verify MySQL connection from container 
-      run: mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW DATABASES"
-
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v2
