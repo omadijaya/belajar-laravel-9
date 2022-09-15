@@ -19,12 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: shogo82148/actions-setup-mysql@v1
-      with:
-        mysql-version: '8.0'
-        
-    - name: Verify MySQL connection
-      run: mysql -uroot -h127.0.0.1 -e 'SELECT version()'
     
     - name: Cache Composer packages
       id: composer-cache
@@ -42,7 +36,7 @@ jobs:
     - name: PHP Linting
       run: vendor/bin/pint --test
 
-    - name: Test with phpunit
-      run: vendor/bin/phpunit --coverage-text
-      env:
-        DB_PORT: ${{ job.services.mysql.ports[3306] }}
+#     - name: Test with phpunit
+#       run: vendor/bin/phpunit --coverage-text
+#       env:
+#         DB_PORT: ${{ job.services.mysql.ports[3306] }}
