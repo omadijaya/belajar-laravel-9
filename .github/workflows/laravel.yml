@@ -12,6 +12,16 @@ jobs:
     container:
       image: kirschbaumdevelopment/laravel-test-runner:8.1
 
+    services:
+      mysql:
+        image: mysql:8.0.30
+        ports:
+          - "3309:3306"
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: laravel
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     env:
       DB_DATABASE: laravel
       DB_USERNAME: root
@@ -19,6 +29,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Verify MYSQL
+      run: mysql --host 127.0.0.1 --port 3309 -uroot -proot -e "SHOW DATABASES"
     
     - name: Cache Composer packages
       id: composer-cache
