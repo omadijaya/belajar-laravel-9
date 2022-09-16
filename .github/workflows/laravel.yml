@@ -53,7 +53,8 @@ jobs:
     - name: PHP Linting
       run: vendor/bin/pint --test
 
-#     - name: Test with phpunit
-#       run: vendor/bin/phpunit --coverage-text
-#       env:
-#         DB_PORT: ${{ job.services.mysql.ports[3306] }}
+    - name: Test with phpunit
+      run: vendor/bin/phpunit --coverage-text
+      env:
+        DB_PORT: 3306
+        DB_HOST: mysqldb
