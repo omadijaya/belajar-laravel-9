@@ -13,7 +13,7 @@ jobs:
       image: kirschbaumdevelopment/laravel-test-runner:8.1
 
     services:
-      mysql:
+      mysqldb:
         image: mysql:8.0.29
         env:
           MYSQL_ROOT_PASSWORD: root
@@ -35,9 +35,7 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Verify MYSQL
-      run: |
-        apt-get install -y mysql-client
-        mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW DATABASES"
+      run: mysql --host mysqldb --port 3306 -uroot -proot -e "SHOW DATABASES"
     
     - name: Cache Composer packages
       id: composer-cache
