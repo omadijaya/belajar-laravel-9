@@ -20,6 +20,8 @@ jobs:
           MYSQL_DATABASE: laravel
         ports:
           - 3306
+        volumes:
+          - ./liquibase/test.sql:/docker-entrypoint-initdb.d/init.sql
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
